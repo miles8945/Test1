@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Submit a Request</title>
+  <!--
+    HOW TO USE
+    1) In Google Forms, click: Send ➜ <> (Embed HTML) ➜ Copy the iframe src URL
+    2) Replace the src value below (YOUR_GOOGLE_FORM_EMBED_URL) with your Google Form embed link
+       It will look like: https://docs.google.com/forms/d/e/FORM_ID/viewform?embedded=true
+    3) Save this file as index.html and host it anywhere (GitHub Pages, Netlify, Vercel, etc.)
+    4) In Make.com, use a Google Sheets ➜ Watch Responses trigger (linked to the same Form)
+       OR use Google Forms ➜ Watch Responses (if available on your plan), then continue your scenario.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #0f172a;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #60a5fa;
+      --ring: rgba(96,165,250,.35);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(96,165,250,.15), transparent 60%),
+                  radial-gradient(900px 500px at 120% 10%, rgba(147,197,253,.1), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    header {
+      padding: 28px 20px 8px;
+      text-align: center;
+    }
+    .title { font-weight: 800; font-size: clamp(22px, 2.4vw, 36px); letter-spacing: .2px; }
+    .subtitle { color: var(--muted); margin-top: 6px; font-size: clamp(14px, 1.6vw, 16px); }
+
+    .container { max-width: 980px; margin: 24px auto 56px; padding: 0 16px; }
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.4);
+      overflow: hidden;
+    }
+    .card-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 18px; gap: 12px; border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .badge { color: #111827; background: linear-gradient(135deg, #93c5fd, #60a5fa); font-weight: 700; font-size: 12px; padding: 6px 10px; border-radius: 999px; }
+    .hint { color: var(--muted); font-size: 13px; }
+
+    .iframe-wrap {
+      position: relative; width: 100%; min-height: 900px; background: #0b1226;
+      border-top: 1px solid rgba(255,255,255,.04);
+    }
+    iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+    }
+
+    .footer { text-align: center; color: var(--muted); font-size: 13px; margin: 22px 0 8px; }
+    .footer a { color: var(--accent); text-decoration: none; }
+    .footer a:focus-visible, .footer a:hover { text-decoration: underline; }
+
+    .notice {
+      margin: 12px 18px 18px; padding: 12px 14px; border-radius: 12px; font-size: 13px;
+      background: rgba(96,165,250,.08); border: 1px solid rgba(96,165,250,.15);
+    }
+    .notice code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title">Automation Intake</div>
+    <div class="subtitle">Fill this form to kick off the Make.com scenario</div>
+  </header>
+
+  <main class="container">
+    <section class="card" aria-label="Google Form">
+      <div class="card-header">
+        <span class="badge" aria-hidden="true">Google Form</span>
+        <span class="hint">If the form doesn’t load, <a href="#open-form" id="open-form">open it in a new tab</a>.</span>
+      </div>
+
+      <div class="notice">
+        <strong>Setup note (remove later):</strong> Replace the iframe <code>src</code> with your Google Form embed URL.
+        You can also update the link target of the “open it in a new tab” anchor to the same URL.
+      </div>
+
+      <div class="iframe-wrap">
+        <!-- Replace ONLY the src below with your Google Form embed URL -->
+        <iframe title="Embedded Google Form" src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true" allow="clipboard-write *; encrypted-media *; fullscreen *;"></iframe>
+      </div>
+    </section>
+
+    <p class="footer">Powered by <a href="https://www.make.com/" rel="noopener" target="_blank">Make.com</a>
+      • Need help wiring the trigger? See the quick steps below.</p>
+
+    <section class="card" aria-label="Make.com Quick Start" style="margin-top:18px;">
+      <div class="card-header"><span class="badge" aria-hidden="true">Quick Start</span><span class="hint">Google Form ➜ Make.com</span></div>
+      <div class="notice" style="margin-top:0;">
+        <ol style="margin:0 0 0 18px; padding:0 0 0 10px;">
+          <li style="margin:8px 0;">In <strong>Google Forms</strong> ➜ <em>Responses</em> tab ➜ click the green Sheets icon to link a response spreadsheet.</li>
+          <li style="margin:8px 0;">In <strong>Make.com</strong>, create a scenario and add the trigger <em>Google Sheets → Watch Responses</em> (or <em>New Row</em>). Connect the same response sheet.</li>
+          <li style="margin:8px 0;">Map your fields to the next modules (e.g., Gmail, Drive, Webhooks, etc.).</li>
+          <li style="margin:8px 0;">Click <strong>Run once</strong>, submit a test via this page, confirm data arrives, then <strong>Turn on scheduling</strong>.</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Optional: keep the "open in a new tab" link in sync with the iframe src
+    const iframe = document.querySelector('iframe');
+    const open = document.getElementById('open-form');
+    if (iframe && open) { open.href = iframe.src; }
+  </script>
+</body>
+</html>
